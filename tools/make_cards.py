@@ -54,7 +54,16 @@ def wrap(draw, text, fnt, maxw):
 
 
 TOTAL = 9
-DATE = "2026.11.26 (목)"
+DATE = "2026.11.26 (목)"   # 오늘 날짜로 교체
+SUBTITLE = "관세·증시·세금부터 블프·파업·연예까지, 사람들이 오늘 가장 많이 보는 6가지"  # 오늘 키워드로 교체
+ONE_LINER = "관세·금리·세금 같은 ‘내 지갑’ 이슈와 블프·파업 같은 ‘당장 내일’ 이슈가 오늘의 중심이에요."  # 오늘 총평으로 교체
+SOURCES = [
+    "뉴스핌 · 데일리티 · 네이트뉴스 (11/26 주요 뉴스)",
+    "뉴스스콰크 유럽장 개장 데일리 뉴스 (11/26)",
+    "KB Think · 이노 블랙프라이데이 일정 안내",
+    "KB증권 장마감 코멘트 (11/17·11/18)",
+    "CJ ENM 티빙 TOP5 · 톱스타뉴스 (11월)",
+]  # 오늘 출처로 교체(5개 이내)
 
 cards = [
     dict(kind="cover"),
@@ -133,7 +142,7 @@ def draw_card(c, i):
         d.text((70, 300), "오늘의", font=font(BLK, 170), fill=dark)
         d.text((70, 490), "관심사", font=font(BLK, 170), fill=dark)
         d.rounded_rectangle((70, 760, 70 + 560, 760 + 12), 6, fill=dark)
-        sub = wrap(d, "관세·증시·세금부터 블프·파업·연예까지,\n사람들이 오늘 가장 많이 보는 6가지".replace("\n", " "), font(MED, 46), 900)
+        sub = wrap(d, SUBTITLE, font(MED, 46), 900)
         y = 810
         for ln in sub:
             d.text((70, y), ln, font=font(MED, 46), fill=dark)
@@ -164,7 +173,7 @@ def draw_card(c, i):
         acc = (255, 214, 10)
         d.text((70, 90), "마무리", font=font(BOLD, 40), fill=acc)
         d.text((70, 170), "오늘의 한 줄", font=font(BLK, 84), fill=fg)
-        lines = wrap(d, "관세·금리·세금 같은 ‘내 지갑’ 이슈와 블프·파업 같은 ‘당장 내일’ 이슈가 오늘의 중심이에요.", font(MED, 44), 940)
+        lines = wrap(d, ONE_LINER, font(MED, 44), 940)
         y = 320
         for ln in lines:
             d.text((70, y), ln, font=font(MED, 44), fill=fg)
@@ -174,14 +183,7 @@ def draw_card(c, i):
         y += 40
         d.text((70, y), "출처", font=font(BOLD, 38), fill=acc)
         y += 70
-        srcs = [
-            "뉴스핌 · 데일리티 · 네이트뉴스 (11/26 주요 뉴스)",
-            "뉴스스콰크 유럽장 개장 데일리 뉴스 (11/26)",
-            "KB Think · 이노 블랙프라이데이 일정 안내",
-            "KB증권 장마감 코멘트 (11/17·11/18)",
-            "CJ ENM 티빙 TOP5 · 톱스타뉴스 (11월)",
-        ]
-        for s in srcs:
+        for s in SOURCES:
             for ln in wrap(d, "· " + s, font(REG, 33), 940):
                 d.text((70, y), ln, font=font(REG, 33), fill=(200, 200, 206))
                 y += 50
